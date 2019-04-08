@@ -14,7 +14,7 @@ import {
  * 本文件是一个C语言词法解析器
  */
 //symbols 符号表
-let symbols = [];
+var symbols = [];
 /**
  * @description Token构造函数
  * @param {String} name token名
@@ -45,6 +45,7 @@ function Lexer(code = "") {
   index = -1;
   line = -1;
   c = "";
+  this.symbols = symbols = [];
 }
 /**
  * 移动并返回下一个字符
@@ -398,7 +399,6 @@ function parseSingleLine() {
 }
 Lexer.prototype.nextToken = nextToken;
 Lexer.prototype.line = line;
-Lexer.prototype.symbols = symbols;
 Lexer.prototype.parseAll = parseAll;
 Lexer.prototype.parseSingleLine = parseSingleLine;
 export default Lexer;
