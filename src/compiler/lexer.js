@@ -364,7 +364,6 @@ function nextToken() {
       case -1:
       default:
         //词法错误
-        // console.error(`词法错误,未知的token:${c}.`);
         throw new Error(`词法错误,未知的token:${c}.`);
     }
     if (token && token != -1) return token;
@@ -379,7 +378,6 @@ function parseAll() {
   let tokens = [];
   let token;
   while ((token = nextToken())) {
-    console.log(token);
     tokens.push(token);
   }
   return tokens;

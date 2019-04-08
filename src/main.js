@@ -2,8 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import "typeface-roboto";
-import "./registerServiceWorker";
 import "./plugins/muse-ui";
 Vue.config.productionTip = false;
 
