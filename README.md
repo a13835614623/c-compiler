@@ -2,6 +2,10 @@
 
 这是一个基于 vue2.0,使用 vue-cli3 搭建的简易的 C 语言编译器项目。
 
+![framework](https://img.shields.io/static/v1.svg?label=framework&message=vue2.0&color=green)
+![coder](https://img.shields.io/static/v1.svg?label=coder&message=zzk&color=blue)
+![lang](https://img.shields.io/static/v1.svg?label=lang&message=javascript&color=lightgreen)
+
 ## 编译器介绍
 
 编译器分为 6 部分,分别为|
