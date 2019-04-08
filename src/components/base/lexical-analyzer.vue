@@ -145,11 +145,11 @@ export default {
     parseToken(functionName) {
       try {
         if (!lexer) lexer = new Lexer(this.code);
+        let tokens = lexer[functionName]();
         this.symbols = lexer.symbols;
-        let token = lexer[functionName]();
-        if (token) {
-          this.tokens = this.tokens.concat(token);
-          this.symbols = lexer.symbols;
+        console.log(lexer.symbols);
+        if (tokens) {
+          this.tokens = this.tokens.concat(tokens);
           this.$toast.success("解析成功!");
         }
       } catch (error) {
