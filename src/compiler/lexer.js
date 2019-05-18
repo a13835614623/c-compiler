@@ -10,20 +10,12 @@ import {
   isLogicOperator,
   isTernaryOperator
 } from "./base";
+import Token from "./po/Token";
 /**
  * 本文件是一个C语言词法解析器
  */
 //symbols 符号表
 var symbols = [];
-/**
- * @description Token构造函数
- * @param {String} name token名
- * @param {String} description token描述
- */
-function Token(name, description = name) {
-  this.name = name;
-  this.description = description;
-}
 // 行号
 var line = -1;
 // 源代码
