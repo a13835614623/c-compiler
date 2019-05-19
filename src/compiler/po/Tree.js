@@ -1,8 +1,9 @@
 let Token = require("./Token");
 /**
  * 树
- * @param {*} val 根节点值
+ * @param {*} name 根节点值
  * @param {Array<Tree>} children 子节点数组
+ * @return {Tree} 树
  */
 function Tree(name, children = []) {
   this.name = name;
@@ -14,6 +15,7 @@ function Tree(name, children = []) {
 /**
  * 后续遍历
  * @param {Tree} tree
+ * @return {Array<Tree>}
  */
 function lastRootAccess(tree) {
   let result = [];
@@ -29,6 +31,7 @@ function lastRootAccess(tree) {
 /**
  * 先序遍历
  * @param {Tree} tree
+ * @return {Array<Tree>}
  */
 function firstRootAccess(tree) {
   let result = [];
