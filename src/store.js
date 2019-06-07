@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     activeStep: {},
-    sourceCode: ""
+    sourceCode: "",
+    symbols: [],
+    tokens: []
   },
   mutations: {
     SET_STEP(state, step) {
@@ -14,6 +16,12 @@ export default new Vuex.Store({
     },
     SAVE_CODE(state, sourceCode) {
       state.sourceCode = sourceCode;
+    },
+    SAVE_SYMBOLS(state, symbols) {
+      state.symbols = symbols;
+    },
+    SAVE_TOKENS(state, tokens) {
+      state.tokens = tokens;
     }
   },
   actions: {}

@@ -53,7 +53,7 @@
         <h2>token表</h2>
         <mu-data-table
           :height="codeHeight"
-          style="width:450px;overflow:hidden;"
+          style="width:450px;"
           :columns="columns"
           no-data-text="暂无token"
           stripe
@@ -62,7 +62,13 @@
         >
           <template slot-scope="scope">
             <td>{{ scope.$index + 1 }}</td>
-            <td>{{ scope.row.name }}</td>
+            <td>
+              {{
+                TOKEN_TAG[scope.row.type]
+                  ? TOKEN_TAG[scope.row.type]
+                  : scope.row.type
+              }}
+            </td>
             <td>{{ scope.row.description }}</td>
           </template>
         </mu-data-table>
@@ -72,8 +78,12 @@
 </template>
 
 <script>
+import { TOKEN_TAG } from "@/compiler/constant.js";
 import Lexer from "@/compiler/lexer.js";
 import preprocessor from "@/compiler/preprocessor.js";
+// let Lexer = require("@/compiler/lexer.js");
+// let { TOKEN_TAG } = require("@/compiler/constant.js");
+// let preprocessor = require("@/compiler/preprocessor.js");
 import codeShow from "@/components/base/code-show";
 var lexer;
 export default {
@@ -112,7 +122,8 @@ export default {
       symbols: [],
       codeHeight: 500,
       // 代码是否经过预处理
-      isPreprocessed: false
+      isPreprocessed: false,
+      TOKEN_TAG
     };
   },
   components: {
@@ -147,12 +158,15 @@ export default {
         if (!lexer) lexer = new Lexer(this.code);
         let tokens = lexer[functionName]();
         this.symbols = lexer.symbols;
-        console.log(lexer.symbols);
         if (tokens) {
           this.tokens = this.tokens.concat(tokens);
+          console.log("tokens:", this.tokens);
+          this.$store.commit("SAVE_TOKENS", this.tokens);
+          this.$store.commit("SAVE_SYMBOLS", this.symbols);
           this.$toast.success("解析成功!");
         }
       } catch (error) {
+        console.error(error);
         this.$toast.error(error.message);
       }
     },

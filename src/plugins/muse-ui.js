@@ -5,10 +5,12 @@ import {
   AppBar,
   Button,
   theme,
+  Tabs,
   TextField,
   Chip,
   Divider,
   DataTable,
+  Dialog,
   Paper,
   Snackbar,
   Grid,
@@ -19,6 +21,8 @@ import {
 import "muse-ui/lib/styles/theme.less";
 import * as colors from "muse-ui/lib/theme/colors";
 Vue.use(Toast);
+Vue.use(Tabs);
+Vue.use(Dialog);
 Vue.use(Snackbar);
 Vue.use(AppBar);
 Vue.use(Chip);
