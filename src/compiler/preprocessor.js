@@ -81,3 +81,4 @@ var deleteCommand = code => {
   return code;
 };
 export default preprocessor;
+// module.exports = preprocessor;

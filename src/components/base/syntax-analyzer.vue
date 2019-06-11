@@ -1,8 +1,8 @@
 <template>
   <div class="syntax-analyzer">
     <mu-tabs :value.sync="activeTab">
-      <mu-tab>语法分析</mu-tab>
-      <mu-tab>自定义产生式分析</mu-tab>
+      <mu-tab>SLR语法分析</mu-tab>
+      <mu-tab>自定义LL(1)产生式分析</mu-tab>
     </mu-tabs>
     <div style="padding:10px;" v-if="activeTab == 1">
       <mu-row gutter v-for="(p, index) in myProducts" :key="index">
@@ -32,11 +32,12 @@
             v-if="index == myProducts.length - 1"
             @click="onAddProduct"
             color="green"
-            ><mu-icon value="add"></mu-icon
-          ></mu-button>
-          <mu-button v-else @click="onRemoveProduct(index)" color="red"
-            ><mu-icon value="remove"></mu-icon
-          ></mu-button>
+          >
+            <mu-icon value="add"></mu-icon>
+          </mu-button>
+          <mu-button v-else @click="onRemoveProduct(index)" color="red">
+            <mu-icon value="remove"></mu-icon>
+          </mu-button>
         </mu-col>
       </mu-row>
       <mu-row gutter>
@@ -106,7 +107,7 @@
           <td>{{ scope.$index + 1 }}</td>
           <td>{{ scope.row.stack }}</td>
           <td>{{ scope.row.input }}</td>
-          <td>{{ scope.row.product }}</td>
+          <td>{{ scope.row.remark }}</td>
         </template>
       </mu-data-table>
     </div>
@@ -133,7 +134,7 @@
 
 <script>
 import AnalyzerString from "@/compiler/syntax-analyzer-string";
-import Analyzer from "@/compiler/syntax-analyzer";
+import LRAnalyzer from "@/compiler/syntax-analyzer-LR";
 import Token from "@/compiler/po/Token";
 import Product from "@/compiler/po/Product";
 import treeView from "./tree-view";
@@ -200,11 +201,21 @@ export default {
       ],
       activeTab: 0,
       infos: [],
-      infos2: []
+      infos2: [],
+      analyzer: null
     };
   },
   created() {
+    const loading = this.$loading({ text: "正在初始化SLR分析表,请稍等..." });
     this.products2MyProducts();
+    setTimeout(() => {
+      this.analyzer = new LRAnalyzer(
+        PRODUCT_1[1].left,
+        PRODUCT_1,
+        this.$store.state.symbols
+      );
+      loading.close();
+    }, 200);
   },
   methods: {
     openFullscreenDialog() {
@@ -227,13 +238,10 @@ export default {
     },
     onParse() {
       try {
-        let analyzer = new Analyzer(PRODUCT_1[0].left, PRODUCT_1);
         console.log(this.$store.state);
-        let { tree, infos } = analyzer.parse(
-          this.$store.state.tokens,
-          this.$store.state.symbols
-        );
+        let { tree, infos } = this.analyzer.parse(this.$store.state.tokens);
         this.infos = infos;
+        this.$store.commit("SAVE_TREE", tree);
         this.dataSet = tree;
         this.isParsed = true;
       } catch (error) {

@@ -5,10 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    activeStep: {},
-    sourceCode: "",
-    symbols: [],
-    tokens: []
+    activeStep: {}, //当前步骤
+    sourceCode: "", //源代码
+    symbols: [], //符号表
+    tokens: [], //token数组
+    tree: null //语法树
   },
   mutations: {
     SET_STEP(state, step) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     SAVE_TOKENS(state, tokens) {
       state.tokens = tokens;
+    },
+    SAVE_TREE(state, tree) {
+      state.tree = tree;
     }
   },
   actions: {}

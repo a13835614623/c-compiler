@@ -28,7 +28,7 @@
     </mu-row>
     <h2>符号表</h2>
     <h2 style="text-align:center;" v-if="!symbols[0]" class="caption">
-      暂无token
+      暂无符号生成
     </h2>
     <mu-row>
       <mu-chip

@@ -1,12 +1,10 @@
 <template>
-  <div class="code-show">
-    <mu-paper :z-depth="2" class="paper">
-      <pre v-if="code">{{ code }}</pre>
-      <div v-else style="text-align:center;padding-top:200px;">
-        <h2 class="caption">暂未导入源代码</h2>
-      </div>
-    </mu-paper>
-  </div>
+  <mu-paper :z-depth="2" class="paper">
+    <pre v-if="code">{{ code }}</pre>
+    <div v-else style="text-align:center;padding-top:200px;">
+      <h2 class="caption">{{ empty }}</h2>
+    </div>
+  </mu-paper>
 </template>
 
 <script>
@@ -17,6 +15,11 @@ export default {
     code: {
       type: String,
       default: "",
+      required: false
+    },
+    empty: {
+      type: String,
+      default: "暂未导入源代码",
       required: false
     }
   },
@@ -37,18 +40,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.code-show {
-  .paper {
-    min-height: 500px;
-    min-width: 500px;
-    background: rgb(90, 89, 89);
-    color: white;
-    pre {
-      font-family: "Courier New", Courier, monospace;
-      text-align: left;
-      font-size: 1.1em;
-      font: bolder;
-    }
+.paper {
+  min-height: 500px;
+  min-width: 500px;
+  background: rgb(90, 89, 89);
+  color: white;
+  padding: 10px;
+  pre {
+    font-family: "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 1.1em;
+    font: bolder;
   }
 }
 </style>

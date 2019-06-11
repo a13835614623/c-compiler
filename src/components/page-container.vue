@@ -45,10 +45,6 @@ export default {
         link: "/syntaxAnalyzer"
       },
       {
-        title: "语义分析",
-        link: "/semanticAnalyzer"
-      },
-      {
         title: "中间代码生成",
         link: "/intermediateCodeGenerator"
       },
